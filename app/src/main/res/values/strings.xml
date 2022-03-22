@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">Cit0rusTest</string>
+    <string name="bar_tab_first">Слои</string>
+    <string name="bar_tab_second">Подложки</string>
+    <string name="bar_tab_third">Миссии</string>
+    <string name="layer_name_delyan">Слой делян</string>
+    <string name="layer_name_signals">Сигналы о лесоизмерениях, тестовая выборка с ув-ным шагом</string>
+    <string name="layer_name_barriers">Преграды для прохождения огня</string>
+    <string name="layer_name_mask_date">Маска облачности от $s</string>
+    <string name="layer_panel_transparency">Прозрачность: $s</string>
+    <string name="layer_panel_el">Эл-ов: $s</string>
+    <string name="layer_panel_zoom">Зум: $s</string>
+    <string name="layer_panel_synch">Синхр.: $s</string>
+
 </resources>
