@@ -1,8 +1,10 @@
-package com.example.cit0rustest.ViewModel
+package com.example.cit0rustest.vm
 
 import com.example.cit0rustest.R
 
-class GroupViewModel (groupName: String) : ItemViewModel {
+class GroupViewModel (
+    val name: String
+    ) : ItemViewModel {
 
     override val layoutId: Int
         get() = R.layout.item_group

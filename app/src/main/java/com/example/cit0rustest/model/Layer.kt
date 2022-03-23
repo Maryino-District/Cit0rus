@@ -1,7 +1,4 @@
-package com.example.cit0rustest.Model
-
-import com.example.cit0rustest.ViewModel.ItemViewModel
-import java.util.*
+package com.example.cit0rustest.model
 
 data class Layer (
     val name: String,

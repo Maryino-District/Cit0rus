@@ -1,9 +1,8 @@
-package com.example.cit0rustest.ViewModel
+package com.example.cit0rustest.vm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.cit0rustest.Model.Layer
 
 class LayerListViewModel : ViewModel() {
     val data: LiveData<List<ItemViewModel>>
@@ -41,6 +40,7 @@ class LayerListViewModel : ViewModel() {
             GroupViewModel(
                 "groooppa"
             )
-        ))//вместо репы
+        )
+    )//вместо репы
 
 }
