@@ -15,8 +15,8 @@ private fun getOrCreateAdapter(recyclerView: RecyclerView): LayersRecyclerVIewAd
     return if (recyclerView.adapter != null && recyclerView.adapter is LayersRecyclerVIewAdapter) {
         recyclerView.adapter as LayersRecyclerVIewAdapter
     } else {
-        val bindableRecyclerAdapter = LayersRecyclerVIewAdapter()
-        recyclerView.adapter = bindableRecyclerAdapter
-        bindableRecyclerAdapter
+        val layersRecyclerVIewAdapter = LayersRecyclerVIewAdapter()
+        recyclerView.adapter = layersRecyclerVIewAdapter
+        layersRecyclerVIewAdapter
     }
 }

@@ -5,7 +5,7 @@ import androidx.databinding.Bindable
 import com.example.cit0rustest.R
 
 class LayerViewModel(
-    @get:Bindable var name: String,
+    @Bindable var name: String,
     var transparency: Int,
     var elementsCount: Int,
     var zoomCount: Int,
@@ -17,7 +17,5 @@ class LayerViewModel(
 
     override val viewType: Int
         get() = 2
-
-
 
 }

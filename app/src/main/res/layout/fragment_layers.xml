@@ -6,21 +6,12 @@
         <variable
             name="viewModel"
             type="com.example.cit0rustest.vm.LayerListViewModel" />
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ddddd"
-            app:layout_constraintEnd_toStartOf="@+id/recyclerView"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textSize="33sp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -29,6 +20,7 @@
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             app:itemViewModels="@{viewModel.data}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:background="@color/white"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

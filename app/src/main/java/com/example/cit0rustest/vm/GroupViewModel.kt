@@ -1,10 +1,12 @@
 package com.example.cit0rustest.vm
 
+import androidx.databinding.BaseObservable
+import androidx.databinding.Bindable
 import com.example.cit0rustest.R
 
 class GroupViewModel (
-    val name: String
-    ) : ItemViewModel {
+    @Bindable val name: String
+    ) : BaseObservable(), ItemViewModel {
 
     override val layoutId: Int
         get() = R.layout.item_group
