@@ -8,7 +8,8 @@ import com.example.cit0rustest.vm.ItemViewModel
 @BindingAdapter("itemViewModels")
 fun bindItemViewModels(recyclerView: RecyclerView, itemViewModels: List<ItemViewModel>?) {
     val adapter = getOrCreateAdapter(recyclerView)
-    adapter.updateItems(itemViewModels)
+    adapter.updateItems(itemViewModels)//ну а notifydatasetchanged обновляет список
+                                       //в соответствии с новым листом
 }
 
 private fun getOrCreateAdapter(recyclerView: RecyclerView): LayersRecyclerVIewAdapter {

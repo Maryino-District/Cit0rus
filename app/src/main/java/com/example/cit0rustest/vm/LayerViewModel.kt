@@ -6,10 +6,11 @@ import com.example.cit0rustest.R
 
 class LayerViewModel(
     @Bindable var name: String,
-    var transparency: Int,
-    var elementsCount: Int,
-    var zoomCount: Int,
-    var syncDate: Int
+    @Bindable var transparency: Int,
+    @Bindable var elementsCount: Int,
+    @Bindable var zoomCount: Int,
+    @Bindable var syncDate: Int,
+    @Bindable var isExpand: Boolean = false
 ) : BaseObservable(), ItemViewModel {
 
     override val layoutId: Int
