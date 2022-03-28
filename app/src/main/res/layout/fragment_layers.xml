@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.cit0rustest.vm.LayerListViewModel" />w
+            type="com.example.cit0rustest.vm.LayerListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,13 +14,50 @@
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/layerRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             app:itemViewModels="@{viewModel.data}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:background="@color/white"/>
+            android:background="@color/dark_blue_20"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/dark_blue_15">
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="12dp"
+                android:background="@color/dark_blue_15"
+
+                android:src="@drawable/add"/>
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@color/green_35"
+                android:src="@drawable/shape"/>
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@color/dark_blue_15"
+                android:src="@drawable/subtract"/>
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@color/dark_blue_15"
+                android:gravity="end"
+                android:src="@drawable/subtract" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -10,28 +10,38 @@ class LayerListViewModel : ViewModel() {
     private val _data  = MutableLiveData<List<ItemViewModel>> (
         listOf<ItemViewModel>(
             LayerViewModel(
-                "Делян",
+                "0",
                 40,
                 5,
                 16,
                 4
             ),
             LayerViewModel(
-                "Делян",
+                "1",
                 40,
                 5,
                 16,
                 4
             ),
             LayerViewModel(
-                "Делян",
+                "2",
+                40,
+                5,
+                16,
+                4
+            ),
+            GroupViewModel(
+                "groooppa"
+            ),
+            LayerViewModel(
+                "3",
                 40,
                 5,
                 16,
                 4
             ),
             LayerViewModel(
-                "Делян",
+                "4",
                 40,
                 5,
                 16,

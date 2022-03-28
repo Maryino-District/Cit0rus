@@ -21,4 +21,10 @@
         <item name="android:textStyle">normal</item>
         <item name="fontFamily">@font/pt_sans_caption</item>
     </style>
+
+    <style name="CustomBottomBar" parent="@android:style/Widget.Button">
+        <item name="color">@color/dark_blue_15</item>
+        <item name="backgroundColor">@color/dark_blue_15</item>
+    </style>
+
 </resources>
