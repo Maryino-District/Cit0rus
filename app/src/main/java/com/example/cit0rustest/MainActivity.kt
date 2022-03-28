@@ -18,6 +18,5 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_container, LayersFragment.getInstance(), "false")
             .commit()
-            Log.d("tag","${layerListViewModel.data.value}")
     }
 }

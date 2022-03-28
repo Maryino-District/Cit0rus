@@ -3,7 +3,7 @@ package com.example.cit0rustest.utils
 import androidx.recyclerview.widget.DiffUtil
 import com.example.cit0rustest.vm.ItemViewModel
 import com.example.cit0rustest.vm.LayerViewModel
-
+//проверка/сравнение обновленных и старых элементов списка
 class LayerItemDiffCallBack(
 val oldList: List<ItemViewModel>,
 var newList: List<ItemViewModel>
@@ -33,4 +33,5 @@ var newList: List<ItemViewModel>
             false
         }
     }
+
 }

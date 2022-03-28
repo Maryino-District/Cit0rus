@@ -20,9 +20,7 @@ class LayersFragment : Fragment() {
         ItemTouchHelper(LayerItemTouchHelperCallBack())
     }
 
-
-
-    companion object { //factory
+    companion object {
         fun getInstance() : LayersFragment{
             return LayersFragment()
         }
@@ -38,9 +36,7 @@ class LayersFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         itemTouchHelper.attachToRecyclerView(binding.layerRecyclerView)
-
-/*        adapter = LayersRecyclerVIewAdapter()
-        adapter.differ.submitList(viewModel.data)*/
         return binding.root
     }
+
 }

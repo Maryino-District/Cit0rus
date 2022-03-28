@@ -5,52 +5,51 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class LayerListViewModel : ViewModel() {
+
     val data: LiveData<List<ItemViewModel>>
         get() = _data
     private val _data  = MutableLiveData<List<ItemViewModel>> (
-        listOf<ItemViewModel>(
+        listOf<ItemViewModel>(//пока что вместо репы
             LayerViewModel(
-                "0",
+                "Слой 1",
                 40,
                 5,
                 16,
                 4
             ),
             LayerViewModel(
-                "1",
+                "Слой 2",
                 40,
                 5,
                 16,
                 4
             ),
             LayerViewModel(
-                "2",
-                40,
-                5,
-                16,
-                4
-            ),
-            GroupViewModel(
-                "groooppa"
-            ),
-            LayerViewModel(
-                "3",
-                40,
-                5,
-                16,
-                4
-            ),
-            LayerViewModel(
-                "4",
+                "Слой 3",
                 40,
                 5,
                 16,
                 4
             ),
             GroupViewModel(
-                "groooppa"
-            )
+                "Общие слои"
+            ),
+            LayerViewModel(
+                "Слой 4 ",
+                40,
+                5,
+                16,
+                4
+            ),
+            LayerViewModel(
+                "Слой 5",
+                40,
+                5,
+                16,
+                4
+            ),
+
         )
-    )//вместо репы
+    )
 
 }

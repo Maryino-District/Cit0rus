@@ -1,6 +1,6 @@
 package com.example.cit0rustest.model
 
-data class Layer (
+data class Layer (//
     val name: String,
     var transparency: Int,
     var elementsCount: Int,
