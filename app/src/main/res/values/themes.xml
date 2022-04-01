@@ -27,4 +27,8 @@
         <item name="backgroundColor">@color/dark_blue_15</item>
     </style>
 
+    <style name="SwitchCompatTheme" >
+        <item name="colorControlActivated">@color/green_35</item>
+    </style>
+
 </resources>

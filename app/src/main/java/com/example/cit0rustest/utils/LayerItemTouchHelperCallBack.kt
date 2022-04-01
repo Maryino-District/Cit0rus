@@ -4,7 +4,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cit0rustest.adapter.LayersRecyclerVIewAdapter
+import com.example.cit0rustest.adapters.LayersRecyclerVIewAdapter
 import com.example.cit0rustest.vm.ItemViewModel
 //
 class LayerItemTouchHelperCallBack() : ItemTouchHelper.SimpleCallback(
@@ -19,8 +19,10 @@ class LayerItemTouchHelperCallBack() : ItemTouchHelper.SimpleCallback(
         val adapter = recyclerView.adapter as LayersRecyclerVIewAdapter
         val from = viewHolder.adapterPosition
         val to = target.adapterPosition
-        adapter.moveItem(from, to)
+        val result = adapter.moveItem(from, to)
         adapter.notifyItemMoved(from, to)
+        adapter.notifyItemChanged(from)
+        adapter.notifyItemChanged(to)
         return true
     }
 

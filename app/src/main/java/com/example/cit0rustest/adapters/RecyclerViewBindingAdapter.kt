@@ -1,9 +1,11 @@
 package com.example.cit0rustest
 
 import androidx.databinding.BindingAdapter
+import androidx.databinding.InverseMethod
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cit0rustest.adapter.LayersRecyclerVIewAdapter
+import com.example.cit0rustest.adapters.LayersRecyclerVIewAdapter
 import com.example.cit0rustest.vm.ItemViewModel
+
 
 @BindingAdapter("itemViewModels")
 fun bindItemViewModels(recyclerView: RecyclerView, itemViewModels: List<ItemViewModel>?) {
@@ -20,3 +22,7 @@ private fun getOrCreateAdapter(recyclerView: RecyclerView): LayersRecyclerVIewAd
         layersRecyclerVIewAdapter
     }
 }
+
+
+
+

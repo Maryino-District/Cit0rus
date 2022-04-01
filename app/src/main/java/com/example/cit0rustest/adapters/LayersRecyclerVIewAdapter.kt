@@ -1,21 +1,17 @@
-package com.example.cit0rustest.adapter
+package com.example.cit0rustest.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.*
-import androidx.recyclerview.widget.ItemTouchHelper.*
 import com.example.cit0rustest.BR
-import com.example.cit0rustest.R
 import com.example.cit0rustest.databinding.ItemLayerBinding
 import com.example.cit0rustest.utils.LayerItemDiffCallBack
-import com.example.cit0rustest.utils.LayerItemTouchHelperCallBack
 import com.example.cit0rustest.vm.*
 import java.util.*
-import kotlin.collections.ArrayList
 
 class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
 
@@ -68,7 +64,8 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
         holder.itemView.setOnClickListener {
             (itemViewModels[position] as? LayerViewModel)?.apply {
                 isExpand = !isExpand
-                println("onbindviewholder --- expandeble")
+                onExpandeClick(isExpand)
+                println("onbindviewholder --- expandeble $position")
             }
             if(isDragDropButtonMute){
                 println("onbindviewholder --- draganddrop")
@@ -84,6 +81,7 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
 
     fun updateItems(items: List<ItemViewModel>?) {
         itemViewModels = items ?: emptyList()
+
     }
 
 }
@@ -94,13 +92,7 @@ class LayersViewHolder(
 
     fun bind(itemViewModel: ItemViewModel) {
         binding.setVariable(BR.itemViewModel, itemViewModel)
-        (binding as? ItemLayerBinding)?.subItem?.apply {
-            if ((itemViewModel as LayerViewModel).isExpand) {
-                visibility = View.VISIBLE
-            } else {
-                visibility = View.GONE
-            }
-        }
+
     }
 
 }
