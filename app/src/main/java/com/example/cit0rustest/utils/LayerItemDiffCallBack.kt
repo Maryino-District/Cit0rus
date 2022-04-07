@@ -28,10 +28,8 @@ var newList: List<ItemViewModel>
         val newItem = newList[newItemPosition]
         return if((oldItem is LayerViewModel) && (newItem is LayerViewModel)) {
             oldItem.name == newItem.name
-
         } else {
             false
         }
     }
-
 }

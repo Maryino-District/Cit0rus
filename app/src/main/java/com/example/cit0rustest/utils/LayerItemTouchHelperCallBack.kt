@@ -10,7 +10,6 @@ import com.example.cit0rustest.vm.ItemViewModel
 class LayerItemTouchHelperCallBack() : ItemTouchHelper.SimpleCallback(
     UP or  DOWN or START or END, 0
 ) {
-
     override fun onMove(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
@@ -25,7 +24,6 @@ class LayerItemTouchHelperCallBack() : ItemTouchHelper.SimpleCallback(
         adapter.notifyItemChanged(to)
         return true
     }
-
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
     }

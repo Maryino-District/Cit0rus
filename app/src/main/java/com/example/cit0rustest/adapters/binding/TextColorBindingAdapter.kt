@@ -6,6 +6,6 @@ import androidx.annotation.ColorInt
 import androidx.databinding.BindingAdapter
 
 @BindingAdapter("android:textColor")
-fun setImageTint(view: TextView, @ColorInt color: Int) {
+fun mytextColor(view: TextView, @ColorInt color: Int) {
     view.setTextColor(color)
 }

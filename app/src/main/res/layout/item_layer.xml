@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="viewModel"
+            type="com.example.cit0rustest.vm.LayerListViewModel" />
+        <variable
             name="itemViewModel"
             type="com.example.cit0rustest.vm.LayerViewModel" />
         <import type="android.view.View"/>
@@ -33,7 +36,6 @@
 
         <TextView
             android:id="@+id/textView"
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -43,7 +45,6 @@
             android:alpha="@{itemViewModel.active ? 1.0f : 0.5f}"
             android:fontFamily="@font/pt_sans_caption"
             android:text="@{itemViewModel.name}"
-
             android:textColor="@{(itemViewModel.expand &amp;&amp; itemViewModel.active) ? @color/green_35 : @color/white}"
             android:textSize="16sp"
             android:typeface="@{Typeface.defaultFromStyle(itemViewModel.expand &amp;&amp; itemViewModel.active ? Typeface.BOLD : Typeface.NORMAL)}"
@@ -84,7 +85,10 @@
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
             android:theme="@style/SwitchCompatTheme"
+            android:checked="@={itemViewModel.switchOn}"
             android:visibility="@{!itemViewModel.dragable ? View.VISIBLE : View.GONE}"
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toTopOf="@+id/sub_item"
@@ -109,24 +113,147 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/sub_item"
             android:layout_width="match_parent"
-
-            android:layout_height="wrap_content"
-            android:background="@color/green_35"
+            android:layout_height="84dp"
+            android:background="@drawable/item_expanded"
             android:orientation="vertical"
             android:visibility="@{itemViewModel.expand &amp;&amp; itemViewModel.active ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
+                android:id="@+id/text_view_transparency"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:text="some text"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="3dp"
+                android:text="@{@string/layer_panel_transparency(itemViewModel.transparency)}"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
+            <TextView
+                android:id="@+id/text_veiw_sync"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginBottom="11dp"
+                android:text="@{@string/layer_panel_sync(itemViewModel.syncDate)}"
+                android:textSize="12sp"
+                android:textColor="@color/grey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/text_view_el"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="11dp"
+                android:text="@{@string/layer_panel_el(itemViewModel.elementsCount)}"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1" />
+
+            <TextView
+                android:id="@+id/text_veiw_zoom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{@string/layer_panel_zoom(itemViewModel.zoomCount)}"
+                android:textSize="12sp"
+                android:textColor="@color/grey"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/text_view_el"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageButton
+                android:id="@+id/imageButton4"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="11dp"
+                android:background="@color/dark_blue_15"
+                android:clickable="true"
+                android:onClick="@{() -> itemViewModel.centerToGps()}"
+                android:src="@drawable/center_to_gps"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageButton
+                android:id="@+id/imageButton5"
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:background="@color/dark_blue_15"
+                android:clickable="true"
+                android:onClick="@{() -> itemViewModel.centerToGps()}"
+                android:src="@drawable/note"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="11dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <ImageButton
+                android:layout_width="21dp"
+                android:layout_height="21dp"
+                android:background="@color/dark_blue_15"
+                android:clickable="true"
+                android:onClick="@{() -> itemViewModel.centerToGps()}"
+                android:src="@drawable/region_border_dash_view"
+                android:layout_marginBottom="11dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageButton5"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginStart="58dp"
+                android:layout_marginTop="22dp"
+                android:layout_marginEnd="10dp"
+                android:value="@={itemViewModel.transparency}"
+                android:valueFrom="0"
+                android:valueTo="100"
+                app:haloColor="@color/grey_2"
+                app:labelBehavior="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:thumbColor="@color/white"
+                app:trackColorActive="@color/green_35"
+                app:trackColorInactive="@color/grey_2" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

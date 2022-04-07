@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
+import androidx.lifecycle.SavedStateViewModelFactory
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.cit0rustest.adapters.LayersRecyclerVIewAdapter
 import com.example.cit0rustest.databinding.FragmentLayersBinding
 import com.example.cit0rustest.utils.LayerItemTouchHelperCallBack
-import com.example.cit0rustest.vm.BarState
-import com.example.cit0rustest.vm.ItemViewModel
 import com.example.cit0rustest.vm.LayerListViewModel
-import com.example.cit0rustest.vm.LayerViewModel
 
 class LayersFragment : Fragment() {
-    private val viewModel: LayerListViewModel by viewModels()
+    private val viewModel: LayerListViewModel by activityViewModels()
     private lateinit var adapter: LayersRecyclerVIewAdapter
     private val itemTouchHelper by lazy {
         ItemTouchHelper(LayerItemTouchHelperCallBack())
@@ -36,14 +36,19 @@ class LayersFragment : Fragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val binding = FragmentLayersBinding.inflate(layoutInflater)
-        binding.lifecycleOwner = this
+        //data binding
+        binding.lifecycleOwner = this.activity
         binding.viewModel = viewModel
-        binding.barState = BarState()
-        itemTouchHelper.attachToRecyclerView(binding.layerRecyclerView)
+        viewModel.isDragButtonOn.observe(this.viewLifecycleOwner, object: Observer<Boolean> {
+            override fun onChanged(t: Boolean?) {
+                if (t == true) {
+                    itemTouchHelper.attachToRecyclerView(binding.layerRecyclerView)
+                } else {
+                    itemTouchHelper.attachToRecyclerView(null)
+                }
+            }
+        })
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
 }

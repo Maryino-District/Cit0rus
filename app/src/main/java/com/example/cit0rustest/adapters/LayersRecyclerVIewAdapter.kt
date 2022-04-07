@@ -29,7 +29,7 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
         )
         return LayersViewHolder(binding)
     }
-//реализуем drag n droop, вызываем в onMove TouchHelper-a
+    //realize drag n droop
     fun moveItem(from: Int, to: Int): MutableList<ItemViewModel> {
         val list = itemViewModels.toMutableList()
         if (from < to) {
@@ -49,7 +49,6 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
         return list
     }
 
-    //определяем заголовочный (группа) айтем или айтем слоя
     override fun getItemViewType(position: Int): Int {
         val item = itemViewModels[position]
         if (!viewTypeToLayoutId.containsKey(item.viewType)) {
@@ -65,10 +64,6 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
             (itemViewModels[position] as? LayerViewModel)?.apply {
                 isExpand = !isExpand
                 onExpandeClick(isExpand)
-                println("onbindviewholder --- expandeble $position")
-            }
-            if(isDragDropButtonMute){
-                println("onbindviewholder --- draganddrop")
             }
             notifyItemChanged(position)
         }
@@ -81,7 +76,7 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
 
     fun updateItems(items: List<ItemViewModel>?) {
         itemViewModels = items ?: emptyList()
-
+        notifyDataSetChanged()
     }
 
 }
@@ -92,7 +87,6 @@ class LayersViewHolder(
 
     fun bind(itemViewModel: ItemViewModel) {
         binding.setVariable(BR.itemViewModel, itemViewModel)
-
     }
 
 }

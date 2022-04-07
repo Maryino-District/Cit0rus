@@ -4,12 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
-            name="barState"
-            type="com.example.cit0rustest.vm.BarState" />
-        <variable
+      <variable
             name="viewModel"
             type="com.example.cit0rustest.vm.LayerListViewModel" />
+        <import type="android.view.View"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,7 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="34sp"
             app:closeIcon="@drawable/shape"
             app:searchIcon="@null"
             app:searchHintIcon="@null"
@@ -69,7 +67,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tabLayout"
-            android:visibility="gone"/>
+            android:visibility="@{viewModel.isSearchButtonOn() ? View.VISIBLE : View.GONE}"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/layerRecyclerView"
@@ -81,8 +80,11 @@
             app:layout_constraintBottom_toTopOf="@+id/view2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView" />
-
+            app:layout_constraintTop_toBottomOf="@+id/searchView"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
+            android:scrollIndicators="right"
+            />
 
         <View
             android:id="@+id/view2"
@@ -96,23 +98,25 @@
             android:id="@+id/imageButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-
-            android:background="@color/dark_blue_15"
+            android:clickable="true"
+            android:onClick="@{() -> viewModel.onAddButtonClicked()}"
+            android:background="@{viewModel.isAddButtonOn ? @color/green_35: @color/dark_blue_15}"
             android:src="@drawable/add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            android:layout_marginLeft="12dp"/>
+            android:layout_marginStart="20dp"
+            android:focusable="true" />
 
         <ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@{barState.buttonOn ? @color/green_35: @color/dark_blue_15}"
             android:src="@drawable/shape"
+            android:background="@{viewModel.isSearchButtonOn ? @color/green_35: @color/dark_blue_15}"
             android:clickable="true"
-            android:onClick="@{() -> barState.changeButtonState()}"
+            android:onClick="@{() -> viewModel.onSearchButtonClicked()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imageButton"
@@ -123,35 +127,46 @@
             android:id="@+id/imageButton3"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@color/dark_blue_15"
             android:src="@drawable/subtract"
+            android:background="@{viewModel.isRemoveButtonOn ? @color/green_35: @color/dark_blue_15}"
+            android:clickable="true"
+            android:onClick="@{() -> viewModel.onRemoveButtonClicked()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0."
-            app:layout_constraintStart_toEndOf="@+id/imageButton2" />
+            app:layout_constraintStart_toEndOf="@+id/imageButton2"
+            android:focusable="true" />
 
         <ImageButton
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@color/dark_blue_15"
+            android:background="@{viewModel.isDragButtonOn ? @color/green_35 : @color/dark_blue_15}"
+            app:tint="@{viewModel.isDragButtonOn ? @color/white: @color/dark_grey}"
+            android:clickable="true"
+            android:onClick="@{() -> viewModel.onDragButtonClicked()}"
             android:src="@drawable/drag_list_item"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/switchCompat"
             app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:focusable="true"/>
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switchCompat"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginRight="12dp"
-            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:visibility="@{viewModel.isDragButtonOn() ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/view2"
-            app:layout_constraintVertical_bias="0.5" />
+            app:layout_constraintVertical_bias="0.5"
+            android:theme="@style/GlobalSwitchCompatTheme"
+            android:background="@{viewModel.switchState==1 ? @color/dark_blue_15  : @color/green_35}"
+            android:onClick="@{() -> viewModel.changeSwitchStates() }"
+            android:checked="@{viewModel.switchState==3 ? true : false}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
