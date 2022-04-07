@@ -42,6 +42,6 @@ class LayerViewModel(
     }
 
     fun centerToGps(){
-        TODO()
+
     }
 }
