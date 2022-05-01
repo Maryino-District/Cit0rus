@@ -1,17 +1,8 @@
 package com.example.cit0rustest.vm
 
-import android.graphics.Color
-import android.icu.util.LocaleData
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.SeekBar
-import android.widget.Toast
-import androidx.annotation.ColorRes
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
 import androidx.lifecycle.*
-import com.example.cit0rustest.BR
 import com.example.cit0rustest.repository.LayerDataProvider
+import java.text.ParsePosition
 
 class LayerListViewModel() : ViewModel() {
 
@@ -50,6 +41,7 @@ class LayerListViewModel() : ViewModel() {
 
 
 
+
     fun onAddButtonClicked() {
         _isAddButtonOn.apply { value = !value!! }
     }
@@ -63,16 +55,15 @@ class LayerListViewModel() : ViewModel() {
     }
 
     fun onDragButtonClicked() {
+        println("---onDragButtonClicked")
         _isDragButtonOn.apply { value = !value!! }
         for (value in data.value.orEmpty()){
-            if (value is LayerViewModel) value.isDragable = !value.isDragable
+            if (value is LayerViewModel) {
+                value.isDragable = !value.isDragable
+            }
         }
         //livedata will not update its values with the same set of elements
-        _data.apply {
-            val tmp = value
-            value = emptyList()
-            value = tmp
-        }
+        _data.value = _data.value
     }
 
     fun changeSwitchStates(){
@@ -101,11 +92,8 @@ class LayerListViewModel() : ViewModel() {
             }
         }
         //livedata will not update its values with the same set of elements
-        _data.apply {
-            val tmp = value
-            value = emptyList()
-            value = tmp
-        }
+        _data.value = _data.value
+
     }
 
     fun saveSwitchStates() {
@@ -121,11 +109,8 @@ class LayerListViewModel() : ViewModel() {
             if (value is LayerViewModel) value.isSwitchOn = false
         }
         //livedata will not update its values with the same set of elements
-        _data.apply {
-            val tmp = value
-            value = emptyList()
-            value = tmp
-        }
+        _data.value = _data.value
+
     }
 
     fun setAllSwitchOn() {
@@ -133,11 +118,13 @@ class LayerListViewModel() : ViewModel() {
             if (value is LayerViewModel) value.isSwitchOn = true
         }
         //livedata will not update its values with the same set of elements
-        _data.apply {
-            val tmp = value
-            value = emptyList()
-            value = tmp
-        }
+        _data.value = _data.value
+
+    }
+
+    fun onExpandeClick(item: LayerViewModel, status: Boolean) {
+        item.isExpand = status
+        _data.value = _data.value
     }
 
 

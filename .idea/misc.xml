@@ -12,7 +12,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_layers.xml" value="0.22592592592592592" />
         <entry key="app/src/main/res/layout/item_group.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/item_layer.xml" value="0.48" />
+        <entry key="app/src/main/res/layout/item_layer.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_layer_expanded.xml" value="0.33" />
       </map>
     </option>

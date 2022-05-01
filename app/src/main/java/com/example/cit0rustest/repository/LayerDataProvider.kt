@@ -2,7 +2,6 @@ package com.example.cit0rustest.repository
 
 import com.example.cit0rustest.vm.GroupViewModel
 import com.example.cit0rustest.vm.ItemViewModel
-import com.example.cit0rustest.vm.LayerListViewModel
 import com.example.cit0rustest.vm.LayerViewModel
 
 class LayerDataProvider {
@@ -16,7 +15,7 @@ class LayerDataProvider {
                 "12.12.12",
                 false,
                 true,
-                false
+
             ),
             LayerViewModel(
                 "Слой 2",
@@ -26,7 +25,6 @@ class LayerDataProvider {
                 "12.12.12",
                 true,
                 true,
-                false,
 
                 ),
             LayerViewModel(
@@ -35,7 +33,6 @@ class LayerDataProvider {
                 5,
                 16..17,
                 "12.12.12",
-                false,
                 false,
                 false,
             ),
@@ -48,7 +45,6 @@ class LayerDataProvider {
                 "12.12.12",
                 true,
                 true,
-                false,
             ),
             LayerViewModel(
                 "Слой 5",
@@ -58,7 +54,6 @@ class LayerDataProvider {
                 "12.12.12",
                 true,
                 true,
-                false,
             ),
             LayerViewModel(
                 "Слой 6",
@@ -68,7 +63,6 @@ class LayerDataProvider {
                 "12.12.12",
                 true,
                 true,
-                false,
             ),
             LayerViewModel(
                 "Слой 7",
@@ -78,7 +72,6 @@ class LayerDataProvider {
                 "12.12.12",
                 true,
                 true,
-                false,
             ),
             LayerViewModel(
                 "Слой 8",
@@ -88,82 +81,78 @@ class LayerDataProvider {
                 "12.12.12",
                 true,
                 true,
-                false,
             ),
 
-            LayerViewModel("name 1",
+            LayerViewModel("слой 9",
             0,
                 0,
                 0..2,
                 "21.04.22",
                 true,
                 false,
-                false
             ),
-            LayerViewModel("name 2",
+            LayerViewModel("слой 9",
                 5,
                 0,
                 0..2,
                 "13.12.22",
                 true,
                 true,
-                false
             ),
             GroupViewModel("группа"
             ),
-            LayerViewModel("name 3",
+            LayerViewModel("слой 10",
                 5,
                 0,
                 0..2,
                 "13.12.22",
                 true,
                 true,
-                false
             ),
-            LayerViewModel("name 4",
+            LayerViewModel("слой 11",
                 5,
                 0,
                 0..2,
                 "13.12.22",
                 true,
                 true,
-                false
+
             ),
-            LayerViewModel("name 5",
+            LayerViewModel("слой 12",
                 5,
                 0,
                 0..2,
                 "13.12.22",
                 true,
                 true,
-                false
+
             ),
-            LayerViewModel("name 6",
+            LayerViewModel("слой 13",
                 5,
                 0,
                 0..2,
                 "13.12.22",
                 true,
                 true,
-                false
+
             ),
-            LayerViewModel("name 7",
+            LayerViewModel("слой 14",
                 5,
                 0,
                 0..2,
                 "13.12.22",
                 true,
                 true,
-                false
+
             ),
-            LayerViewModel("name 8",
+            LayerViewModel("слой 15",
                 5,
                 0,
                 0..2,
                 "13.12.22",
                 true,
                 true,
-                false
+
             )
         )
     }

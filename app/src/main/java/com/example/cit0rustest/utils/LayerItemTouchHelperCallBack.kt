@@ -19,9 +19,10 @@ class LayerItemTouchHelperCallBack() : ItemTouchHelper.SimpleCallback(
         val from = viewHolder.adapterPosition
         val to = target.adapterPosition
         val result = adapter.moveItem(from, to)
-        adapter.notifyItemMoved(from, to)
-        adapter.notifyItemChanged(from)
-        adapter.notifyItemChanged(to)
+        adapter.notifyItemMoved(from,to)
+        println("---moved----from $from to $to")
+        adapter.submitList(result)
+
         return true
     }
 

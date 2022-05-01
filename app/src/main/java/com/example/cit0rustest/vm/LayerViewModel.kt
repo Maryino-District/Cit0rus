@@ -1,27 +1,19 @@
 package com.example.cit0rustest.vm
 
-import android.icu.util.LocaleData
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.SeekBar
-import androidx.annotation.ColorRes
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
+
 import com.example.cit0rustest.R
-import java.util.*
-import com.example.cit0rustest.BR
+import java.text.FieldPosition
 
 
-class LayerViewModel(
+data class LayerViewModel(
     var name: String = "def",
-    @get: Bindable var transparency: Int = 5,
+    var transparency: Int = 5,
     var elementsCount: Int = 0,
     var zoomCount: IntRange = 0..0,
     var syncDate: String = "12.12.12",
-    @get: Bindable var isSwitchOn: Boolean = false,
+    var isSwitchOn: Boolean = false,
     var isActive: Boolean = true,
-    var isDragable: Boolean = false
-) : BaseObservable(), ItemViewModel {
+) : ItemViewModel {
 
     override val layoutId: Int
         get() = R.layout.item_layer
@@ -29,16 +21,28 @@ class LayerViewModel(
     override val viewType: Int
         get() = 2
 
-    @get:Bindable
+
+    var isDragable: Boolean = false
+        set(value) {
+            if (field != value) {
+                println("----binding DRAAGABLE")
+                field = value
+                //    notifyPropertyChanged(BR.expand)
+            }
+        }
+    //@get:Bindable
     var isExpand: Boolean = false
         set(value) {
-            field = value
-            notifyPropertyChanged(BR.expand)
+            if (field != value) {
+                field = value
+            //    notifyPropertyChanged(BR.expand)
+            }
         }
 
-    fun onExpandeClick(newExpand: Boolean) {
-        isExpand = newExpand
-        notifyPropertyChanged(BR.expand)
+    fun onExpandeClick(item: LayerViewModel, status: Boolean ) {
+        isExpand = status
+        LayerListViewModel().onExpandeClick(item, status)
+        //notifyPropertyChanged(BR.expand)
     }
 
     fun centerToGps(){

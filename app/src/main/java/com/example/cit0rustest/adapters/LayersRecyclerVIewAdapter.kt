@@ -1,37 +1,41 @@
 package com.example.cit0rustest.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.*
 import com.example.cit0rustest.BR
-import com.example.cit0rustest.databinding.ItemLayerBinding
 import com.example.cit0rustest.utils.LayerItemDiffCallBack
 import com.example.cit0rustest.vm.*
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 import java.util.*
+
 
 class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
 
-    //var itemViewModels: List<ItemViewModel> = emptyList()
     private val viewTypeToLayoutId: MutableMap<Int, Int> = mutableMapOf()
-    var itemViewModels: List<ItemViewModel> = emptyList()
-    private val isDragDropButtonMute = false//tmp
+    val mItemViewModels: MutableList<ItemViewModel> = arrayListOf()
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LayersViewHolder {
+        println("---oncreateview")
+
         val binding: ViewDataBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             viewTypeToLayoutId[viewType] ?:0,
             parent,
             false
         )
+//        val holder = LayersViewHolder(binding)
+
         return LayersViewHolder(binding)
     }
     //realize drag n droop
     fun moveItem(from: Int, to: Int): MutableList<ItemViewModel> {
-        val list = itemViewModels.toMutableList()
+        val list = mItemViewModels.toMutableList()
         if (from < to) {
             for (i in from until to) {
                  Collections.swap(list, i, i + 1)
@@ -41,16 +45,37 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
                 Collections.swap(list, i, i - 1)
             }
         }
-        val differCallBack = LayerItemDiffCallBack(itemViewModels,list)
-        val diffResult = DiffUtil.calculateDiff(differCallBack)
-        diffResult.dispatchUpdatesTo(this)
-        itemViewModels = list
         notifyItemMoved(from,to)
+
         return list
+    }
+     fun submitList(updatedList: List<ItemViewModel>) {
+        println("---sub")
+
+        val differCallBack = LayerItemDiffCallBack(mItemViewModels, updatedList)
+
+        val diffResult = DiffUtil.calculateDiff(differCallBack,true)
+      /*  mItemViewModels.clear()
+        mItemViewModels.addAll()*/
+        mItemViewModels.clear()
+        for(items in updatedList) {
+            val tmp = Gson().toJson(items)
+            if (items is LayerViewModel) {
+                mItemViewModels.add(Gson().fromJson(tmp, LayerViewModel::class.java))
+            } else {
+                mItemViewModels.add(Gson().fromJson(tmp, GroupViewModel::class.java))
+            }
+        }
+        //mItemViewModels.addAll(Gson().fromJson<MutableList<ItemViewModel>>(gson,listOfMyClassObject))
+        diffResult.dispatchUpdatesTo(this)
+
+
     }
 
     override fun getItemViewType(position: Int): Int {
-        val item = itemViewModels[position]
+        println("---getItemViewType")
+
+        val item = mItemViewModels[position]
         if (!viewTypeToLayoutId.containsKey(item.viewType)) {
             viewTypeToLayoutId[item.viewType] = item.layoutId
         }
@@ -58,25 +83,31 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: LayersViewHolder, position: Int) {
+        println("---onBindViewHolder")
+
         println("tag onBindViewHolder positiion is ${position}")
-        holder.bind(itemViewModels[position])
+        holder.bind(mItemViewModels[position])
         holder.itemView.setOnClickListener {
-            (itemViewModels[position] as? LayerViewModel)?.apply {
-                isExpand = !isExpand
-                onExpandeClick(isExpand)
+
+            (mItemViewModels[holder.adapterPosition] as? LayerViewModel)?.apply {
+                //isExpand = !isExpand
+                onExpandeClick(this, !isExpand)
             }
-            notifyItemChanged(position)
+            notifyItemChanged(holder.adapterPosition)
         }
+
     }
 
     override fun getItemCount(): Int {
-        return itemViewModels.size
+        println("---getItemCount")
+        return mItemViewModels.size
+
     }
 
 
     fun updateItems(items: List<ItemViewModel>?) {
-        itemViewModels = items ?: emptyList()
-        notifyDataSetChanged()
+        println("---updateItems")
+        items?.let { submitList(items) }
     }
 
 }
@@ -87,6 +118,8 @@ class LayersViewHolder(
 
     fun bind(itemViewModel: ItemViewModel) {
         binding.setVariable(BR.itemViewModel, itemViewModel)
-    }
+        println("---bind")
 
+    }
 }
+

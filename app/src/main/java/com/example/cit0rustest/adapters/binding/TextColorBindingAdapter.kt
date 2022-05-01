@@ -1,6 +1,5 @@
 package com.example.cit0rustest.adapters
 
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.databinding.BindingAdapter

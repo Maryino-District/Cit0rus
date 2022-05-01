@@ -17,7 +17,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
 
         <ImageView
@@ -90,6 +91,7 @@
             android:theme="@style/SwitchCompatTheme"
             android:checked="@={itemViewModel.switchOn}"
             android:visibility="@{!itemViewModel.dragable ? View.VISIBLE : View.GONE}"
+
             android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toTopOf="@+id/sub_item"
             app:layout_constraintEnd_toEndOf="parent"

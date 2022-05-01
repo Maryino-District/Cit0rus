@@ -6,19 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.SavedStateViewModelFactory
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.example.cit0rustest.adapters.LayersRecyclerVIewAdapter
 import com.example.cit0rustest.databinding.FragmentLayersBinding
 import com.example.cit0rustest.utils.LayerItemTouchHelperCallBack
 import com.example.cit0rustest.vm.LayerListViewModel
 
 class LayersFragment : Fragment() {
     private val viewModel: LayerListViewModel by activityViewModels()
-    private lateinit var adapter: LayersRecyclerVIewAdapter
     private val itemTouchHelper by lazy {
         ItemTouchHelper(LayerItemTouchHelperCallBack())
     }
@@ -33,7 +28,7 @@ class LayersFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         val binding = FragmentLayersBinding.inflate(layoutInflater)
         //data binding
