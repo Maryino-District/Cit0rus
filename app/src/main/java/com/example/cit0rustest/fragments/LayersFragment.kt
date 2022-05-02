@@ -15,7 +15,7 @@ import com.example.cit0rustest.vm.LayerListViewModel
 class LayersFragment : Fragment() {
     private val viewModel: LayerListViewModel by activityViewModels()
     private val itemTouchHelper by lazy {
-        ItemTouchHelper(LayerItemTouchHelperCallBack())
+        ItemTouchHelper(LayerItemTouchHelperCallBack(viewModel))
     }
 
     companion object {

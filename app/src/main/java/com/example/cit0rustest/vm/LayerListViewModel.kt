@@ -2,9 +2,11 @@ package com.example.cit0rustest.vm
 
 import androidx.lifecycle.*
 import com.example.cit0rustest.repository.LayerDataProvider
+import com.example.cit0rustest.utils.LayerItemTouchHelperCallBack
 import java.text.ParsePosition
+import java.util.*
 
-class LayerListViewModel() : ViewModel() {
+class LayerListViewModel() : ViewModel(), LayerItemTouchHelperCallBack.ItemTouchContract {
 
     //livedata of recyclerview
     val data: LiveData<List<ItemViewModel>>
@@ -40,7 +42,20 @@ class LayerListViewModel() : ViewModel() {
     }
 
 
+    override fun moveItem(from: Int, to: Int) {
 
+        if (from < to) {
+            for (i in from until to) {
+                _data.value?.let { Collections.swap(it, i, i + 1) }
+            }
+        } else {
+            for (i in from downTo  to+1 ) {
+                _data.value?.let { Collections.swap(it, i, i - 1) }
+            }
+        }
+
+        _data.value = _data.value
+    }
 
     fun onAddButtonClicked() {
         _isAddButtonOn.apply { value = !value!! }
