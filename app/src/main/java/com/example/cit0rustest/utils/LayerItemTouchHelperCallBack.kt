@@ -33,14 +33,6 @@ class LayerItemTouchHelperCallBack(val viewModel: ItemTouchContract) : ItemTouch
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
     }
 
-    override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-        super.onSelectedChanged(viewHolder, actionState)
-    }
-
-    override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-        super.clearView(recyclerView, viewHolder)
-    }
-
     interface ItemTouchContract {
         fun moveItem(from: Int, to: Int)
     }

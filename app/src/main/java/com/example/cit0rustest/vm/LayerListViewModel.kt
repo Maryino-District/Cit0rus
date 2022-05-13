@@ -6,7 +6,7 @@ import com.example.cit0rustest.utils.LayerItemTouchHelperCallBack
 import java.text.ParsePosition
 import java.util.*
 
-class LayerListViewModel() : ViewModel(), LayerItemTouchHelperCallBack.ItemTouchContract {
+class LayerListViewModel : ViewModel(), LayerItemTouchHelperCallBack.ItemTouchContract {
 
     //livedata of recyclerview
     val data: LiveData<List<ItemViewModel>>

@@ -1,11 +1,13 @@
 package com.example.cit0rustest.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.*
 import com.example.cit0rustest.BR
+import com.example.cit0rustest.databinding.ItemLayerBinding
 import com.example.cit0rustest.utils.LayerItemDiffCallBack
 import com.example.cit0rustest.vm.*
 import com.google.gson.Gson
@@ -25,7 +27,7 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
 
         val binding: ViewDataBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
-            viewTypeToLayoutId[viewType] ?:0,
+            viewTypeToLayoutId[viewType] ?: 0,
             parent,
             false
         )
@@ -34,31 +36,17 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
         return LayersViewHolder(binding)
     }
     //realize drag n droop
-    fun moveItem(from: Int, to: Int): MutableList<ItemViewModel> {
-        val list = mItemViewModels.toMutableList()
-        if (from < to) {
-            for (i in from until to) {
-                 Collections.swap(list, i, i + 1)
-            }
-        } else {
-            for (i in from downTo  to+1 ) {
-                Collections.swap(list, i, i - 1)
-            }
-        }
-        notifyItemMoved(from,to)
 
-        return list
-    }
-     fun submitList(updatedList: List<ItemViewModel>) {
+    fun submitList(updatedList: List<ItemViewModel>) {
         println("---sub")
 
         val differCallBack = LayerItemDiffCallBack(mItemViewModels, updatedList)
 
-        val diffResult = DiffUtil.calculateDiff(differCallBack,true)
-      /*  mItemViewModels.clear()
-        mItemViewModels.addAll()*/
+        val diffResult = DiffUtil.calculateDiff(differCallBack, true)
+        /*  mItemViewModels.clear()
+          mItemViewModels.addAll()*/
         mItemViewModels.clear()
-        for(items in updatedList) {
+        for (items in updatedList) {
             val tmp = Gson().toJson(items)
             if (items is LayerViewModel) {
                 mItemViewModels.add(Gson().fromJson(tmp, LayerViewModel::class.java))
@@ -87,14 +75,20 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
 
         println("tag onBindViewHolder positiion is ${position}")
         holder.bind(mItemViewModels[position])
-        holder.itemView.setOnClickListener {
+        /* holder.itemView.setOnClickListener {
 
-            (mItemViewModels[holder.adapterPosition] as? LayerViewModel)?.apply {
-                //isExpand = !isExpand
-                onExpandeClick(this, !isExpand)
-            }
-            notifyItemChanged(holder.adapterPosition)
-        }
+             (mItemViewModels[holder.adapterPosition] as? LayerViewModel)?.apply {
+                 //isExpand = !isExpand
+                 //onExpandeClick(this, !isExpand)
+               /*  if ((holder.binding is ItemLayerBinding) && holder.binding.subItem.visibility == View.GONE) {
+                     holder.binding.subItem.visibility = View.VISIBLE
+                 } else if ((holder.binding is ItemLayerBinding) && holder.binding.subItem.visibility == View.VISIBLE) {
+                     holder.binding.subItem.visibility = View.GONE
+                 }
+             }
+             notifyItemChanged(holder.adapterPosition)*/}
+
+         }*/
 
     }
 
@@ -113,7 +107,7 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
 }
 
 class LayersViewHolder(
-    private val binding: ViewDataBinding
+    val binding: ViewDataBinding
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(itemViewModel: ItemViewModel) {

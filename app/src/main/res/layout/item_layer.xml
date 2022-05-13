@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.cit0rustest.vm.LayerListViewModel" />
+
         <variable
             name="itemViewModel"
             type="com.example.cit0rustest.vm.LayerViewModel" />
-        <import type="android.view.View"/>
+
+        <import type="android.view.View" />
+
         <import type="android.graphics.Typeface" />
     </data>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
 
         <ImageView
@@ -28,12 +31,12 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
-            android:alpha="@{itemViewModel.active ? 1.0f : 0.5f}"
             android:src="@drawable/geometry_collection"
             app:layout_constraintBottom_toTopOf="@+id/sub_item"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@{(itemViewModel.expand &amp;&amp; itemViewModel.active) ? @color/green_35 : @color/white}" />
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--app:tint="@{(itemViewModel.expand &amp;&amp; itemViewModel.active) ? @color/green_35 : @color/white}"-->
+        <!--android:alpha="@{itemViewModel.active ? 1.0f : 0.5f}"-->
 
         <TextView
             android:id="@+id/textView"
@@ -43,12 +46,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="48dp"
             android:layout_marginBottom="10dp"
-            android:alpha="@{itemViewModel.active ? 1.0f : 0.5f}"
             android:fontFamily="@font/pt_sans_caption"
             android:text="@{itemViewModel.name}"
-            android:textColor="@{(itemViewModel.expand &amp;&amp; itemViewModel.active) ? @color/green_35 : @color/white}"
             android:textSize="16sp"
-            android:typeface="@{Typeface.defaultFromStyle(itemViewModel.expand &amp;&amp; itemViewModel.active ? Typeface.BOLD : Typeface.NORMAL)}"
             app:layout_constraintBottom_toTopOf="@+id/sub_item"
             app:layout_constraintEnd_toStartOf="@+id/imageView5"
             app:layout_constraintHorizontal_bias="0.0"
@@ -56,47 +56,49 @@
             app:layout_constraintTop_toTopOf="parent"
             app:tint="@color/green_35"
             tools:text="fffffff" />
+        <!--android:textColor="@{(itemViewModel.expand &amp;&amp; itemViewModel.active) ? @color/green_35 : @color/white}"-->
+        <!--android:typeface="@{Typeface.defaultFromStyle(itemViewModel.expand &amp;&amp; itemViewModel.active ? Typeface.BOLD : Typeface.NORMAL)}"-->
+        <!-- android:alpha="@{itemViewModel.active ? 1.0f : 0.5f}" -->
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="12dp"
             android:layout_height="wrap_content"
             android:layout_marginRight="74dp"
-            android:alpha="@{itemViewModel.active ? 1.0f : 0.5f}"
-            android:rotation="@{itemViewModel.expand &amp;&amp; itemViewModel.active ? 180 : 0}"
             android:src="@drawable/chevron_right"
             app:layout_constraintBottom_toTopOf="@+id/sub_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+        <!--android:rotation="@{itemViewModel.expand &amp;&amp; itemViewModel.active ? 180 : 0}"-->
+        <!--android:alpha="@{itemViewModel.active ? 1.0f : 0.5f}"-->
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:alpha="0.5"
             android:src="@drawable/union_3"
-            android:visibility="@{itemViewModel.active ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@+id/sub_item"
             app:layout_constraintEnd_toStartOf="@+id/imageView5"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent"
-            android:alpha="0.5"/>
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--android:visibility="@{itemViewModel.active ? View.GONE : View.VISIBLE}"-->
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/switch1"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
-            android:minHeight="0dp"
-            android:minWidth="0dp"
-            android:theme="@style/SwitchCompatTheme"
-            android:checked="@={itemViewModel.switchOn}"
-            android:visibility="@{!itemViewModel.dragable ? View.VISIBLE : View.GONE}"
-
             android:layout_marginEnd="16dp"
+            android:checked="@={itemViewModel.switchOn}"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:theme="@style/SwitchCompatTheme"
             app:layout_constraintBottom_toTopOf="@+id/sub_item"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:alpha="@{itemViewModel.active ? 1.0f : 0.5f}" />
+            app:layout_constraintTop_toTopOf="parent" />
+        <!--android:visibility="@{!itemViewModel.dragable ? View.VISIBLE : View.GONE}"-->
+        <!--android:alpha="@{itemViewModel.active ? 1.0f : 0.5f}"-->
 
 
         <ImageView
@@ -105,12 +107,12 @@
             android:layout_height="20dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/drag_list_item"
-            android:visibility="@{itemViewModel.dragable ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/sub_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
+        <!--android:visibility="@{itemViewModel.dragable ? View.VISIBLE : View.GONE}"-->
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/sub_item"
@@ -118,11 +120,12 @@
             android:layout_height="84dp"
             android:background="@drawable/item_expanded"
             android:orientation="vertical"
-            android:visibility="@{itemViewModel.expand &amp;&amp; itemViewModel.active ? View.VISIBLE : View.GONE}"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent">
+            <!--android:visibility="@{itemViewModel.expand &amp;&amp; itemViewModel.active ? View.VISIBLE : View.GONE}"-->
 
             <TextView
                 android:id="@+id/text_view_transparency"
@@ -148,8 +151,8 @@
                 android:layout_marginEnd="17dp"
                 android:layout_marginBottom="11dp"
                 android:text="@{@string/layer_panel_sync(itemViewModel.syncDate)}"
-                android:textSize="12sp"
                 android:textColor="@color/grey"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
@@ -178,12 +181,12 @@
                 android:id="@+id/text_veiw_zoom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{@string/layer_panel_zoom(itemViewModel.zoomCount)}"
-                android:textSize="12sp"
-                android:textColor="@color/grey"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="3dp"
                 android:layout_marginBottom="11dp"
+                android:text="@{@string/layer_panel_zoom(itemViewModel.zoomCount)}"
+                android:textColor="@color/grey"
+                android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -198,7 +201,6 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="11dp"
                 android:background="@color/dark_blue_15"
-                android:clickable="true"
                 android:onClick="@{() -> itemViewModel.centerToGps()}"
                 android:src="@drawable/center_to_gps"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -210,12 +212,11 @@
                 android:id="@+id/imageButton5"
                 android:layout_width="21dp"
                 android:layout_height="21dp"
-                android:background="@color/dark_blue_15"
-                android:clickable="true"
-                android:onClick="@{() -> itemViewModel.centerToGps()}"
-                android:src="@drawable/note"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="11dp"
+                android:background="@color/dark_blue_15"
+                android:onClick="@{() -> itemViewModel.centerToGps()}"
+                android:src="@drawable/note"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageButton4"
                 app:layout_constraintTop_toTopOf="parent"
@@ -224,12 +225,11 @@
             <ImageButton
                 android:layout_width="21dp"
                 android:layout_height="21dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="11dp"
                 android:background="@color/dark_blue_15"
-                android:clickable="true"
                 android:onClick="@{() -> itemViewModel.centerToGps()}"
                 android:src="@drawable/region_border_dash_view"
-                android:layout_marginBottom="11dp"
-                android:layout_marginEnd="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageButton5"
                 app:layout_constraintTop_toTopOf="parent"
