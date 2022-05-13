@@ -43,7 +43,6 @@ class LayerListViewModel : ViewModel(), LayerItemTouchHelperCallBack.ItemTouchCo
 
 
     override fun moveItem(from: Int, to: Int) {
-
         if (from < to) {
             for (i in from until to) {
                 _data.value?.let { Collections.swap(it, i, i + 1) }
@@ -53,7 +52,6 @@ class LayerListViewModel : ViewModel(), LayerItemTouchHelperCallBack.ItemTouchCo
                 _data.value?.let { Collections.swap(it, i, i - 1) }
             }
         }
-
         _data.value = _data.value
     }
 

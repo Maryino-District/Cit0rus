@@ -1,19 +1,17 @@
 package com.example.cit0rustest.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cit0rustest.BR
-import com.example.cit0rustest.databinding.ItemLayerBinding
 import com.example.cit0rustest.utils.LayerItemDiffCallBack
-import com.example.cit0rustest.vm.*
+import com.example.cit0rustest.vm.GroupViewModel
+import com.example.cit0rustest.vm.ItemViewModel
+import com.example.cit0rustest.vm.LayerViewModel
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.lang.reflect.Type
-import java.util.*
 
 
 class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
@@ -21,30 +19,21 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
     private val viewTypeToLayoutId: MutableMap<Int, Int> = mutableMapOf()
     val mItemViewModels: MutableList<ItemViewModel> = arrayListOf()
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LayersViewHolder {
         println("---oncreateview")
-
         val binding: ViewDataBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
             viewTypeToLayoutId[viewType] ?: 0,
             parent,
             false
         )
-//        val holder = LayersViewHolder(binding)
-
         return LayersViewHolder(binding)
     }
-    //realize drag n droop
 
     fun submitList(updatedList: List<ItemViewModel>) {
         println("---sub")
-
         val differCallBack = LayerItemDiffCallBack(mItemViewModels, updatedList)
-
         val diffResult = DiffUtil.calculateDiff(differCallBack, true)
-        /*  mItemViewModels.clear()
-          mItemViewModels.addAll()*/
         mItemViewModels.clear()
         for (items in updatedList) {
             val tmp = Gson().toJson(items)
@@ -54,15 +43,11 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
                 mItemViewModels.add(Gson().fromJson(tmp, GroupViewModel::class.java))
             }
         }
-        //mItemViewModels.addAll(Gson().fromJson<MutableList<ItemViewModel>>(gson,listOfMyClassObject))
         diffResult.dispatchUpdatesTo(this)
-
-
     }
 
     override fun getItemViewType(position: Int): Int {
         println("---getItemViewType")
-
         val item = mItemViewModels[position]
         if (!viewTypeToLayoutId.containsKey(item.viewType)) {
             viewTypeToLayoutId[item.viewType] = item.layoutId
@@ -71,31 +56,13 @@ class LayersRecyclerVIewAdapter : RecyclerView.Adapter<LayersViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: LayersViewHolder, position: Int) {
-        println("---onBindViewHolder")
-
         println("tag onBindViewHolder positiion is ${position}")
         holder.bind(mItemViewModels[position])
-        /* holder.itemView.setOnClickListener {
-
-             (mItemViewModels[holder.adapterPosition] as? LayerViewModel)?.apply {
-                 //isExpand = !isExpand
-                 //onExpandeClick(this, !isExpand)
-               /*  if ((holder.binding is ItemLayerBinding) && holder.binding.subItem.visibility == View.GONE) {
-                     holder.binding.subItem.visibility = View.VISIBLE
-                 } else if ((holder.binding is ItemLayerBinding) && holder.binding.subItem.visibility == View.VISIBLE) {
-                     holder.binding.subItem.visibility = View.GONE
-                 }
-             }
-             notifyItemChanged(holder.adapterPosition)*/}
-
-         }*/
-
     }
 
     override fun getItemCount(): Int {
         println("---getItemCount")
         return mItemViewModels.size
-
     }
 
 
@@ -113,7 +80,6 @@ class LayersViewHolder(
     fun bind(itemViewModel: ItemViewModel) {
         binding.setVariable(BR.itemViewModel, itemViewModel)
         println("---bind")
-
     }
 }
 

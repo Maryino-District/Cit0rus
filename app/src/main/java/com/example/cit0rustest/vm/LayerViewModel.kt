@@ -27,22 +27,19 @@ data class LayerViewModel(
             if (field != value) {
                 println("----binding DRAAGABLE")
                 field = value
-                //    notifyPropertyChanged(BR.expand)
             }
         }
-    //@get:Bindable
+
     var isExpand: Boolean = false
         set(value) {
             if (field != value) {
                 field = value
-            //    notifyPropertyChanged(BR.expand)
             }
         }
 
     fun onExpandeClick(item: LayerViewModel, status: Boolean ) {
         isExpand = status
         LayerListViewModel().onExpandeClick(item, status)
-        //notifyPropertyChanged(BR.expand)
     }
 
     fun centerToGps(){

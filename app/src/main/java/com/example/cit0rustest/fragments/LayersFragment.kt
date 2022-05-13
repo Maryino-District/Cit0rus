@@ -31,7 +31,6 @@ class LayersFragment : Fragment() {
     ): View {
         super.onCreateView(inflater, container, savedInstanceState)
         val binding = FragmentLayersBinding.inflate(layoutInflater)
-        //data binding
         binding.lifecycleOwner = this.activity
         binding.viewModel = viewModel
         viewModel.isDragButtonOn.observe(this.viewLifecycleOwner, object: Observer<Boolean> {
